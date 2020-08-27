@@ -1,24 +1,46 @@
 # puzzle-festival-vue
 
-## Project setup
-```
-npm install
-```
+狐友春节活动
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+技术栈： Vue + SpriteJS
 
-### Compiles and minifies for production
-```
-npm run build
-```
+功能： 贴纸的选择、删除、移动、缩放、层级置顶/置底操作，合成最终图片。
 
-### Lints and fixes files
-```
-npm run lint
-```
+![image.png](https://i.loli.net/2020/08/26/3fdLBN817FieE2o.png)
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## 用户操作与体验
+
+### 贴纸点击与拖拽
+
+点击会使贴纸“激活”，进入编辑状态并置顶（详见层级处理）。  
+拖拽只会变更贴纸位置。
+
+### 缩放
+
+贴纸限制最大缩放比例，一些贴纸会可以缩放到很小，使用双指进行缩放用户体验较差，所以使用单个按钮作为旋转和缩放的操作柄。
+
+### 层级处理
+
+移动端空间较小，很多场景需要处理层级，又没办法提供像PS那样完善的层级处理方案。  
+点击“激活”贴纸时，将贴纸置顶，在贴纸编辑状态，提供置底按钮，可以将贴纸置底。
+
+### 贴纸选择区高度
+
+产品提出的方案，收起时只收到拼图区域下方，而不是完全收起。  
+当拼图区域下方能完整显示选择区时，不进行收起操作。  
+页面刚加载时，提供引导动画。
+
+### 贴纸选择区切换
+
+分类激活动画通过`em`实现和文本等宽，百分比进行偏移。  
+提升：动画如果能和手势一致
+
+### 添加相同贴纸
+
+同时添加相同贴纸时，为避免用户没有感知，对后一个进行偏移。
+
+## 其他
+
+移除一些不必要逻辑，以及一些资源，仅供参考。
+
+感谢狐友团队~

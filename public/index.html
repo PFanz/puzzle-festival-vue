@@ -6,6 +6,38 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title><%= htmlWebpackPlugin.options.title %></title>
+    <script type="text/javascript">
+      /*
+       * html 头部最早执行的js片段 用于rem计算等
+       */
+      (window.onresize = function() {
+        var maxLimitW = 768,
+          remCount = 7.5,
+          clientW = document.documentElement.clientWidth,
+          hasReadyInit;
+        var initFontSize = Math.min(maxLimitW, clientW) / remCount;
+        document.documentElement.style.fontSize = initFontSize + "px";
+  
+        // 修正系统设置了字号之后，支持动态字体的APP会强制调整网页font-size，导致rem方式的适配乱版问题
+        if (clientW >= maxLimitW) return;
+        if (hasReadyInit) return;
+        document.addEventListener("DOMContentLoaded", function() {
+          var remFixDom = document.createElement("div");
+          remFixDom.style.cssText =
+            "width:100%;height:1rem;opacity:0;position:absolute;top:0;z-index:-9999;";
+          document.body.appendChild(remFixDom);
+          remFixDom.offsetHeight; //某些未探明的场景下 需要手动触发一下ios 浏览器的重绘 @20181212
+          var render = window.getComputedStyle(remFixDom);
+          var rRate = (
+            render.width.slice(0, -2) / render.height.slice(0, -2)
+          ).toFixed(1);
+          if (rRate != remCount)
+            document.documentElement.style.fontSize =
+              initFontSize * (rRate / remCount) + "px";
+          hasReadyInit = true;
+        });
+      })();
+    </script>
   </head>
   <body>
     <noscript>

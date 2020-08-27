@@ -9,6 +9,9 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "sass": "^1.26.10",
+    "sass-loader": "^10.0.1",
+    "sprite-vue": "^0.21.1",
     "vue": "^2.6.11"
   },
   "devDependencies": {
